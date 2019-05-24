@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Search{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form action={{ url_for("search.search") }} method="post">
+    <label for="latitude">Latitude</label>
+    <input name="latitude" id="latitude" required>
+    <label for="longitude">Longitude</label>
+    <input name="longitude" id="longitude" required>
+    <label for="start_date">Start date</label>
+    <input name="start_date" id="start_date" required>
+    <label for="end_date">End date</label>
+    <input type="end_date" name="end_date" id="end_date" required>
+    <input type="submit" value="Search">
+  </form>
+{% endblock %}
