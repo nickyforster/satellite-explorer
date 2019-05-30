@@ -1,13 +1,63 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Search{% endblock %}</h1>
+{% block head %}
+  {% block title %}Granule search{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 
 {% block content %}
-<ul>
-    {% for item in result %}
-        <li>{{ item }}</li>
-    {% endfor %}
-</ul>
+<section class='description'>
+    <p>Select a satellite collection to search for satellite images in.</p>
+</section>
+  <form class="collection-radios" action={{ url_for("results.granule_results") }} method="post">
+    <div class="collection-list" id='terra-before-radios'>
+      {% for item in result['terra_before'] %}
+      <div class="radio-container">
+        <input type="radio" id="{{ item }}" value="{{ item }}" name="collection"></input>
+        <label for="{{ item }}"> {{ item }}</label>
+        <div class="count">{{ item }}</div>
+      </div>
+      <div class="summary">
+          <!-- <p>{{ item[2] }}</p> -->
+      </div>
+      {% endfor %}
+    </div>
+    <div class="collection-list" id='terra-after-radios'>
+      {% for item in result['terra_after'] %}
+      <div class="radio-container">
+        <input type="radio" id="{{ item }}" value="{{ item }}" name="collection"></input>
+        <label for="{{ item }}"> {{ item }}</label>
+        <div class="count">{{ item }}</div>
+      </div>
+      <div class="summary">
+          <!-- <p>{{ item[2] }}</p> -->
+      </div>
+      {% endfor %}
+    </div>
+    <div class="collection-list" id='aqua-before-radios'>
+      {% for item in result['aqua_before'] %}
+      <div class="radio-container">
+        <input type="radio" id="{{ item }}" value="{{ item }}" name="collection"></input>
+        <label for="{{ item }}"> {{ item }}</label>
+        <div class="count">{{ item }}</div>
+      </div>
+      <div class="summary">
+          <!-- <p>{{ item[2] }}</p> -->
+      </div>
+      {% endfor %}
+    </div>
+    <div class="collection-list" id='aqua-after-radios'>
+      {% for item in result['aqua_after'] %}
+      <div class="radio-container">
+        <input type="radio" id="{{ item }}" value="{{ item }}" name="collection"></input>
+        <label for="{{ item }}"> {{ item }}</label>
+        <div class="count">{{ item }}</div>
+      </div>
+      <div class="summary">
+          <!-- <p>{{ item[2] }}</p> -->
+      </div>
+      {% endfor %}
+    </div>
+    <input type="submit" value="Search for granules">
+  </form>
 {% endblock %}

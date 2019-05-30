@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  {% block title %}Satellite image search{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+  <form action="{{ url_for('search.search_before_after') }}">
+    <input type="submit" class="concept-button" value="Before and after"></input>
+  </form>
+{% endblock %}

@@ -1,9 +1,51 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Search{% endblock %}</h1>
+{% block head %}
+  <h1>{% block title %}Granule results{% endblock %}</h1>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 
 {% block content %}
-<section>Testing</section>
+  <section class="granule-results">
+    <div class="image-container">
+      <h1>Terra before</h1>
+      {% for item in result['terra_before'] %}
+        <img src="{{ item[0] }}" alt="image">
+        <form action="{{ url_for('data') }}" method="post">
+          <input reodonly='readonly' name='url' id='url' value='{{ item[1] }}'></input>
+          <input type="submit" value="Process image">
+        </form>
+      {% endfor %}
+    </div>
+    <div class='image-container'>
+      <h1>Aqua before</h1>
+      {% for item in result['aqua_before'] %}
+        <img src="{{ item[0] }}" alt="image">
+        <form action="{{ url_for('data') }}" method="post">
+          <input reodonly='readonly' name='url' id='url' value='{{ item[1] }}'></input>
+          <input type="submit" value="Process image">
+        </form>
+      {% endfor %}
+    </div>
+    <div class='image-container'>
+      <h1>Terra after</h1>
+      {% for item in result['terra_after'] %}
+        <img src="{{ item[0] }}" alt="image">
+        <form action="{{ url_for('data') }}" method="post">
+          <input reodonly='readonly' name='url' id='url' value='{{ item[1] }}'></input>
+          <input type="submit" value="Process image">
+        </form>
+      {% endfor %}
+    </div>
+    <div class='image-container'>
+      <h1>Aqua after</h1>
+      {% for item in result['aqua_after'] %}
+        <img src="{{ item[0] }}" alt="image">
+        <form action="{{ url_for('data') }}" method="post">
+          <input reodonly='readonly' name='url' id='url' value='{{ item[1] }}'></input>
+          <input type="submit" value="Process image">
+        </form>
+      {% endfor %}
+    </div>
+  </section>
 {% endblock %}
