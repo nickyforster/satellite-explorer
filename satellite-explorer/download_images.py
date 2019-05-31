@@ -13,11 +13,11 @@ class DownloadSession:
         if resp.status_code != 200:
             print("not downloaded. Verify that your username and password are correct")
         else:
-            resp.raw.decode_content = True
-            content = resp.raw
+            total_length = int(resp.headers.get('content-length'))
+            dl = 0
             with open(f'{app.root_path}/data/temp.hdf', 'wb') as outfile:
-                while True:
-                    chunk = content.read(16 * 1024)
-                    if not chunk:
-                        break
-                    outfile.write(chunk)
+                for data in resp.iter_content(chunk_size=16384):
+                    dl += len(data)
+                    outfile.write(data)
+                    done = int(dl / total_length * 100)
+                    print(f'{done}%', end='\r')
