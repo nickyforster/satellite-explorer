@@ -50,14 +50,14 @@ def create_app(test_config=None):
                 '-co', 'COMPRESS=DEFLATE', '-co', 'COMPRESS=DEFLATE'])
             out5 = gdal_scale.wait()
 
-            contrast_brightness = '10'
-            contrast_pivot = '25'
-            modulate_brightness = '100'
-            modulate_saturation = '85'
-            sharpen_radius = '4'
-            sharpen_sigma = '1'
-            convert = Popen(['convert', '-channel', 'B', '-gamma', '1.03', '-channel', 'RGB',
-                '-sigmoidal-contrast', f'{contrast_brightness},{contrast_pivot}%',
+            contrast_brightness = '30'
+            contrast_pivot = '33'
+            modulate_brightness = '135'
+            modulate_saturation = '60'
+            sharpen_radius = '.5'
+            sharpen_sigma = '3'
+            convert = Popen(['convert', '-channel', 'B', '-gamma', '0.95', '-channel', 'R', '-gamma', '1.01',
+                '-channel', 'RGB', '-sigmoidal-contrast', f'{contrast_brightness},{contrast_pivot}%',
                 '-modulate', f'{modulate_brightness},{modulate_saturation}', '-sharpen',
                 f'{sharpen_radius},{sharpen_sigma}',
                 f'{current_app.root_path}/data/temp_final_rgb_scaled.tif',
