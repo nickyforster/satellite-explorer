@@ -6,6 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+flask = "*"
+requests = "*"
+xmltodict = "*"
+gdal = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.7"
