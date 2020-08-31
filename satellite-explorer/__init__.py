@@ -27,13 +27,13 @@ def create_app(test_config=None):
             downloading = download_images.DownloadSession()
             downloading.download_granule(data_endpoint)
 
-            gdal_warp_1 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', '+proj=utm +zone=10 +datum=WGS84',
+            gdal_warp_1 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', 'EPSG:3452',
                 f'HDF4_EOS:EOS_GRID:{temp_file_loc}:MODIS_Grid_500m_2D:sur_refl_b01_1', f'{current_app.root_path}/data/temp_band_1.tif'])
             out1 = gdal_warp_1.wait()
-            gdal_warp_2 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', '+proj=utm +zone=10 +datum=WGS84',
+            gdal_warp_2 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', 'EPSG:3452',
                 f'HDF4_EOS:EOS_GRID:{temp_file_loc}:MODIS_Grid_500m_2D:sur_refl_b04_1', f'{current_app.root_path}/data/temp_band_4.tif'])
             out2 = gdal_warp_2.wait()
-            gdal_warp_3 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', '+proj=utm +zone=10 +datum=WGS84',
+            gdal_warp_3 = Popen(['gdalwarp', '-of', 'GTiff', '-t_srs', 'EPSG:3452',
                 f'HDF4_EOS:EOS_GRID:{temp_file_loc}:MODIS_Grid_500m_2D:sur_refl_b03_1', f'{current_app.root_path}/data/temp_band_3.tif'])
             out3 = gdal_warp_3.wait()
 
@@ -50,9 +50,9 @@ def create_app(test_config=None):
                 '-co', 'COMPRESS=DEFLATE', '-co', 'COMPRESS=DEFLATE'])
             out5 = gdal_scale.wait()
 
-            contrast_brightness = '30'
-            contrast_pivot = '33'
-            modulate_brightness = '135'
+            contrast_brightness = '25'
+            contrast_pivot = '30'
+            modulate_brightness = '110'
             modulate_saturation = '60'
             sharpen_radius = '.5'
             sharpen_sigma = '3'
