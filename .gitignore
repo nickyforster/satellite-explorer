@@ -1,6 +1,7 @@
 .vscode
 
 *.pyc
+*.DS_Store
 __pycache__/
 
 instance/
